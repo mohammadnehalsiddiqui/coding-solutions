@@ -1,32 +1,21 @@
 #include <stdio.h>
-#include <string.h>
-#include <math.h>
 #include <stdlib.h>
 
-#define MAX_LEN 100
+void update(int *a, int *b) {
+    int sum = *a + *b;
+    int diff = abs(*a - *b);
 
-int main() 
-{
-    char ch;
-    char s[MAX_LEN];
-    char sentence[MAX_LEN];
+    *a = sum;
+    *b = diff;
+}
 
-    // Read the character
-    scanf("%c", &ch);
-    
-    // Read the single-word string
-    scanf("%s", s);
-    
-    // Consume the leftover newline character from the previous input
-    scanf("\n");
-    
-    // Read the full sentence (including spaces)
-    scanf("%[^\n]%*c", sentence);
+int main() {
+    int a, b;
+    int *pa = &a, *pb = &b;
 
-    // Print the outputs on separate lines
-    printf("%c\n", ch);
-    printf("%s\n", s);
-    printf("%s\n", sentence);
+    scanf("%d %d", &a, &b);
+    update(pa, pb);
+    printf("%d\n%d", a, b);
 
     return 0;
 }
