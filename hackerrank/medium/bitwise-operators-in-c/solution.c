@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
 
 void calculate_the_maximum(int n, int k) {
     int max_and = 0;
@@ -8,7 +11,7 @@ void calculate_the_maximum(int n, int k) {
     for (int a = 1; a <= n; a++) {
         for (int b = a + 1; b <= n; b++) {
             int and_val = a & b;
-            int or_val = a | b;
+            int or_val  = a | b;
             int xor_val = a ^ b;
 
             if (and_val < k && and_val > max_and) {
