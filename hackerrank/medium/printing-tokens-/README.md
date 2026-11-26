@@ -1,4 +1,4 @@
-# Array Reversal
+# Printing Tokens
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -23,45 +23,43 @@ Print each word of the sentence in a new line.
 **Language:** C  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-11-26T07:05:05.962Z  
+**Submitted:** 2026-11-26T07:06:19.082Z  
 
 ```c
 #include <stdio.h>
 #include <stdlib.h>
 
 int main() {
-    int num, *arr, i;
-    
-    if (scanf("%d", &num) != 1) {
+    char *s;
+    s = malloc(1024 * sizeof(char));
+    if (s == NULL) {
         return 1;
     }
-    
-    arr = (int *) malloc(num * sizeof(int));
-    if (arr == NULL) {
-        return 1;
-    }
-    
-    for (i = 0; i < num; i++) {
-        scanf("%d", arr + i);
+
+    // Read the entire line including spaces until a newline
+    if (scanf("%[^\n]", s) == 1) {
+        // Reallocate to exact length + 1 for the null terminator
+        int len = 0;
+        while (s[len] != '\0') {
+            len++;
+        }
+        char *resized = realloc(s, (len + 1) * sizeof(char));
+        if (resized != NULL) {
+            s = resized;
+        }
+
+        // Print each word on its own line
+        for (int i = 0; s[i] != '\0'; i++) {
+            if (s[i] == ' ') {
+                printf("\n");
+            } else {
+                printf("%c", s[i]);
+            }
+        }
+        printf("\n");
     }
 
-    /* Write the logic to reverse the array. */
-    int left = 0;
-    int right = num - 1;
-    while (left < right) {
-        int temp = arr[left];
-        arr[left] = arr[right];
-        arr[right] = temp;
-        left++;
-        right--;
-    }
-
-    for (i = 0; i < num; i++) {
-        printf("%d ", *(arr + i));
-    }
-    printf("\n");
-    
-    free(arr);
+    free(s);
     return 0;
 }
 
